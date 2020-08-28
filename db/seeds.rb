@@ -8,6 +8,16 @@
 
 # ID3 tag music genres are surprisingly specific.
 
+Artist.destroy_all
+Song.destroy_all
+Genre.destroy_all
+Note.destroy_all
+Artist.reset_pk_sequence
+Song.reset_pk_sequence
+Genre.reset_pk_sequence
+Note.reset_pk_sequence
+
+
 genres = Hash[[
   "Blues",
   "Classic Rock",
@@ -160,3 +170,8 @@ genres = Hash[[
 ].map { |genre| [genre, Genre.find_or_create_by(name: genre)] }]
 
 
+pauline = Artist.create(name: "Pauline")
+finding = pauline.songs.create!(title: "Finding out", genre_id:2)
+mass = pauline.songs.create!(title: "Mass People", genre_id:5)
+finding.notes.create!(content: "Don't find out where I am")
+mass.notes.create!(content: "Listen to me, there are aliens")
